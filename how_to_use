@@ -1,0 +1,12 @@
+'''
+Created by An, Linna (linnaan@uw.edu) 2020/09/29
+'''
+- The four demo folders are created for the report, 'De novo protein design using the blueprint builder in Rosetta'. All scripts and files are created/adapted by Dr. Linna An, or Dr. Gyu Rie Lee. The developers and references of the original scripts are acknowledged or cited in the main text, and/or in the scripts body.
+
+- It's recommended to keep the original folder structures. In this way, most of the commands from the report can be followed directly without path change.
+
+- In each folder, there is a file called 'commands', or 'gen_seq_design_cmd', which contains the command(s) used in the major execution steps. Please do make changes to adjust to your own settings. Major things you may consider to change include the path and syntaxes.
+
+- in demo_bb/ and demo_seq/ folders, a .log file was created, which contains the logs from executing the corresponding rosetta commands. The log file creation step was not included in the demonstration. The aim of keeping these log files is to allow the users to check the execution procedure of Rosetta through reading the log files. 
+
+- Good luck, welcome to Rosetta and protein design!

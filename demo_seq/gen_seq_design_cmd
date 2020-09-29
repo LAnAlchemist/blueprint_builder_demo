@@ -1,0 +1,1 @@
+python ./scripts/seq_cmd_generator.py /home/linnaan/rosetta/main/source/bin/rosetta_scripts.default.linuxgccrelease ./seq_design.xml ./seq_design.resfile ../demo_bb/sel_for_seq_design

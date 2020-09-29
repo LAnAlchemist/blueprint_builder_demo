@@ -1,0 +1,1 @@
+/software/rosetta/latest/bin/rosetta_scripts -s ./input.pdb -parser:protocol ./bb_gen.xml -parser:script_vars bp=./bp cst=./cst weights=./fldsgn_cen_omega02.wts -out:path:pdb ./result -out:path:score ./result -out:suffix _demo -nstruct 10

@@ -1,0 +1,1 @@
+python ./scripts/pyrosetta_pdb_to_bp.py 4rlc.pdb

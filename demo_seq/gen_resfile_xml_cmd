@@ -1,0 +1,2 @@
+#copy the blueprint file, template_bb_design.xml, and cst_trp
+python ./scripts/gen_resfile_xml_from_bp.py ./bp ./seq_design.resfile ./seq_design.xml

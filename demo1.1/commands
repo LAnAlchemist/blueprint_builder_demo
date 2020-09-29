@@ -1,0 +1,1 @@
+python scripts/gen_bp_cst.py "L1E9L3E13L2E10L3E13L2E8L4E11L2E8L3E10L1" "E1.1;E2.5;E3.8;E4.5,7;E6.5;E8.5" bp cst

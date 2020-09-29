@@ -1,0 +1,83 @@
+<ROSETTASCRIPTS>
+  #This template xml file for designing the sequence of a beta-barrel has been constructed by borrowing the xml files provided in [Dou and Vorobieva et al., De novo design of a fluorescence-activating β-barrel, Nature, 2018.]
+
+  <SCOREFXNS>
+        <ScoreFunction name="beta" weights="beta_nov15_cst" />
+    </SCOREFXNS>
+
+    <RESIDUE_SELECTORS>
+      <Index name="resfile_res" resnums="8,9,11,17,18,19,20,25,33,34,35,43,45,46,47,48,53,55,61,62,63,71,72,75,80,86,87,88,96,97,98,99,104,108" />
+      <Not name="not_resfile_res" selector="resfile_res" />
+      
+      <Layer name="coreRes" select_core="true" use_sidechain_neighbors="true" core_cutoff="2.1" surface_cutoff="1.0"/>
+      <Layer name="bdryRes" select_boundary="true" use_sidechain_neighbors="true" core_cutoff="2.1" surface_cutoff="1.0"/>
+      <Layer name="surfaceRes" select_surface="true" use_sidechain_neighbors="true" core_cutoff="2.1" surface_cutoff="1.0"/>
+
+      <SecondaryStructure name="helix" ss="H"  pose_secstruct="LLHHHHLLEEEEEEEEELLLEEEEEEEEEEEEELLEEEEEEEEEELLLEEEEEEEEEEEEELLEEEEEEEELLLLEEEEEEEEEEELLEEEEEEEELLLEEEEEEEEEEL"/>
+      <SecondaryStructure name="strand" ss="E"  pose_secstruct="LLHHHHLLEEEEEEEEELLLEEEEEEEEEEEEELLEEEEEEEEEELLLEEEEEEEEEEEEELLEEEEEEEELLLLEEEEEEEEEEELLEEEEEEEELLLEEEEEEEEEEL"/>
+      <SecondaryStructure name="loop" ss="L"  pose_secstruct="LLHHHHLLEEEEEEEEELLLEEEEEEEEEEEEELLEEEEEEEEEELLLEEEEEEEEEEEEELLEEEEEEEELLLLEEEEEEEEEEELLEEEEEEEELLLEEEEEEEEEEL"/>
+      
+      <And name="coreH" selectors="coreRes,helix,not_resfile_res" />
+      <And name="coreE" selectors="coreRes,strand,not_resfile_res" />
+      <And name="coreL" selectors="coreRes,loop,not_resfile_res" />
+      <And name="boundH" selectors="bdryRes,helix,not_resfile_res" />
+      <And name="boundE" selectors="bdryRes,strand,not_resfile_res" />
+      <And name="boundL" selectors="bdryRes,loop,not_resfile_res" />
+      <And name="surfH" selectors="surfaceRes,helix,not_resfile_res" />
+      <And name="surfE" selectors="surfaceRes,strand,not_resfile_res" />
+      <And name="surfL" selectors="surfaceRes,loop,not_resfile_res" />
+    </RESIDUE_SELECTORS>
+
+    <TASKOPERATIONS>
+      <ReadResfile name="resfile" filename="%%resfile%%" />
+
+      <OperateOnResidueSubset name="design_helixCore_AA" selector="coreH" >
+        <RestrictAbsentCanonicalAASRLT aas="AFILVM"/>
+      </OperateOnResidueSubset>
+      <OperateOnResidueSubset name="design_strandCore_AA" selector="coreE" >
+        <RestrictAbsentCanonicalAASRLT aas="FILVM"/>
+      </OperateOnResidueSubset>
+      <OperateOnResidueSubset name="design_loopCore_AA" selector="coreL" >
+        <RestrictAbsentCanonicalAASRLT aas="AGFILPVWYM"/>
+      </OperateOnResidueSubset>
+      
+      <OperateOnResidueSubset name="design_helixBound_AA" selector="boundH" >
+        <RestrictAbsentCanonicalAASRLT aas="AILNQSTVY"/>
+      </OperateOnResidueSubset>
+      <OperateOnResidueSubset name="design_strandBound_AA" selector="boundE" >
+        <RestrictAbsentCanonicalAASRLT aas="ILNQSTVY"/>
+      </OperateOnResidueSubset>
+      <OperateOnResidueSubset name="design_loopBound_AA" selector="boundL" >
+        <RestrictAbsentCanonicalAASRLT aas="ADEFGIKLNPQRSTVY"/>
+      </OperateOnResidueSubset>
+      
+      <OperateOnResidueSubset name="design_helixSurf_AA" selector="surfH" >
+        <RestrictAbsentCanonicalAASRLT aas="DEHKNQRST"/>
+      </OperateOnResidueSubset>
+      <OperateOnResidueSubset name="design_strandSurf_AA" selector="surfE" >
+        <RestrictAbsentCanonicalAASRLT aas="DHKNQRT"/>
+      </OperateOnResidueSubset>
+      <OperateOnResidueSubset name="design_loopSurf_AA" selector="surfL" >
+        <RestrictAbsentCanonicalAASRLT aas="DEGHKNPQRST"/>
+      </OperateOnResidueSubset>
+      
+    </TASKOPERATIONS>
+    
+    <MOVERS>
+      <MutateResidue name="TrpCorner" target="11A" new_res="TRP" />
+      <FastDesign name="fdesign" task_operations="resfile,design_helixCore_AA,design_strandCore_AA,design_loopCore_AA,design_helixBound_AA,design_strandBound_AA,design_loopBound_AA,design_helixSurf_AA,design_strandSurf_AA,design_loopSurf_AA" scorefxn="beta" cst_file="%%cst_trp%%" ramp_down_constraints="1" />
+    </MOVERS>
+
+    <FILTERS>
+    </FILTERS>
+
+    <APPLY_TO_POSE>
+    </APPLY_TO_POSE>
+
+    <PROTOCOLS>
+      <Add mover_name="TrpCorner"/>
+      <Add mover_name="fdesign" />
+    </PROTOCOLS>
+
+</ROSETTASCRIPTS>
+
